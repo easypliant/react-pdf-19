@@ -37,28 +37,26 @@ const pdf = (initialValue) => {
   const render = async (compress = true) => {
     const props = container.document.props || {};
     const {
-      pdfVersion,
+      author,
+      creationDate = new Date(),
+      creator = 'react-pdf',
+      keyboards,
       language,
+      modificationDate,
       pageLayout,
       pageMode,
-      title,
-      author,
-      subject,
-      keyboards,
-      creator = 'react-pdf',
+      pdfVersion,
       producer = 'react-pdf',
-      creationDate = new Date(),
-      modificationDate,
+      subject,
+      subset,
+      tagged,
+      title,
     } = props;
 
     const ctx = new PDFDocument({
-      compress,
-      pdfVersion,
-      lang: language,
-      displayTitle: true,
       autoFirstPage: false,
-      pageLayout,
-      pageMode,
+      compress,
+      displayTitle: true,
       info: omitNils({
         Title: title,
         Author: author,
@@ -69,6 +67,12 @@ const pdf = (initialValue) => {
         CreationDate: creationDate,
         ModificationDate: modificationDate,
       }),
+      lang: language,
+      pageLayout,
+      pageMode,
+      pdfVersion,
+      subset,
+      tagged
     });
 
     const layout = await layoutDocument(container.document, fontStore);

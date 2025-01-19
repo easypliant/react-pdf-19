@@ -69,7 +69,7 @@ class FontSource {
       const data = await fetchFont(this.src, { method, body, headers });
       this.data = fontkit.create(data, postscriptName);
     } else if (!BROWSER) {
-      this.data = await fontkit.open(this.src, postscriptName);
+      this.data = fontkit.openSync(this.src, postscriptName);
     }
   }
 
